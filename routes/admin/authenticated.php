@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\Admin\BillPaymentController;
 use App\Http\Controllers\Api\Admin\BillPaymentDetailController;
 use App\Http\Controllers\Api\Admin\CustomerController;
 use App\Http\Controllers\Api\Admin\EmployeeController;
+use App\Http\Controllers\Api\Admin\PaymentChequeController;
 use App\Http\Controllers\Api\Admin\PaymentController;
 use App\Http\Controllers\Api\Admin\PaymentDetailController;
 use App\Http\Controllers\Api\Admin\ProductCategoryController;
@@ -31,6 +32,7 @@ Route::middleware('auth:sanctum')->group(function () {
         'billdetails' => BillDetailController::class,
         'payments' => PaymentController::class,
         'payment_details' => PaymentDetailController::class,
+        'payment_cheques' => PaymentChequeController::class,
         'sales_invoice' => SalesInvoiceController::class,
         'sales_invoice_details' => SalesInvoiceDetailController::class,
         'bills_payment' => BillPaymentController::class,

@@ -14,20 +14,31 @@ class SalesInvoiceDetail extends Model
         'sales_invoice_id',
         'sales_invoice_ref_doc_no',
         'product_id',
+        'quantity',
         'barcode',
         'unit',
         'expiry_date',
-        'quantity',
         'price',
     ];
+
+    public function product(): BelongsTo
+    {
+        return $this->belongsTo(Product::class);
+    }
 
     public function sales_invoice(): BelongsTo
     {
         return $this->belongsTo(SalesInvoice::class);
     }
 
-    public function product(): BelongsTo
+    protected static function booted()
     {
-        return $this->belongsTo(Product::class);
+        static::created(function ($salesInvoiceDetail) {
+            $product = $salesInvoiceDetail->product;
+            if ($product) {
+                $product->quantity_onhand -= $salesInvoiceDetail->quantity;
+                $product->save();
+            }
+        });
     }
 }

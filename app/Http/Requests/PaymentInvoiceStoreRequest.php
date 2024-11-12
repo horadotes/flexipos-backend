@@ -22,9 +22,10 @@ class PaymentInvoiceStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'payment_id',
-            'sales_invoice_id',
-            'amount',
+            'payment_id' => 'required',
+            'sales_invoice_id' => 'required',
+            'amount' => 'required',
+            'date' => 'required',
         ];
     }
 }

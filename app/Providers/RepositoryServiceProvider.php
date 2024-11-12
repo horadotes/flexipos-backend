@@ -9,7 +9,9 @@ use App\Interface\Repository\BillPaymentRepositoryInterface;
 use App\Interface\Repository\BillRepositoryInterface;
 use App\Interface\Repository\CustomerRepositoryInterface;
 use App\Interface\Repository\EmployeeRepositoryInterface;
+use App\Interface\Repository\PaymentChequeRepositoryInterface;
 use App\Interface\Repository\PaymentDetailRepositoryInterface;
+use App\Interface\Repository\PaymentInvoiceRepositoryInterface;
 use App\Interface\Repository\PaymentRepositoryInterface;
 use App\Interface\Repository\ProductCategoryRepositoryInterface;
 use App\Interface\Repository\ProductRepositoryInterface;
@@ -25,7 +27,9 @@ use App\Interface\Service\BillPaymentServiceInterface;
 use App\Interface\Service\BillServiceInterface;
 use App\Interface\Service\CustomerServiceInterface;
 use App\Interface\Service\EmployeeServiceInterface;
+use App\Interface\Service\PaymentChequeServiceInterface;
 use App\Interface\Service\PaymentDetailServiceInterface;
+use App\Interface\Service\PaymentInvoiceServiceInterface;
 use App\Interface\Service\PaymentServiceInterface;
 use App\Interface\Service\ProductCategoryServiceInterface;
 use App\Interface\Service\ProductServiceInterface;
@@ -40,7 +44,9 @@ use App\Repository\BillPaymentRepository;
 use App\Repository\BillRepository;
 use App\Repository\CustomerRepository;
 use App\Repository\EmployeeRepository;
+use App\Repository\PaymentChequeRepository;
 use App\Repository\PaymentDetailRepository;
+use App\Repository\PaymentInvoiceRepository;
 use App\Repository\PaymentRepository;
 use App\Repository\ProductCategoryRepository;
 use App\Repository\ProductRepository;
@@ -56,7 +62,9 @@ use App\Service\BillPaymentService;
 use App\Service\BillService;
 use App\Service\CustomerService;
 use App\Service\EmployeeService;
+use App\Service\PaymentChequeService;
 use App\Service\PaymentDetailService;
+use App\Service\PaymentInvoiceService;
 use App\Service\PaymentService;
 use App\Service\ProductCategoryService;
 use App\Service\ProductService;
@@ -90,6 +98,8 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(BillPaymentRepositoryInterface::class, BillPaymentRepository::class);
         $this->app->bind(BillPaymentDetailRepositoryInterface::class, BillPaymentDetailRepository::class);
         $this->app->bind(BillPaymentChequeRepositoryInterface::class, BillPaymentChequeRepository::class);
+        $this->app->bind(PaymentInvoiceRepositoryInterface::class, PaymentInvoiceRepository::class);
+        $this->app->bind(PaymentChequeRepositoryInterface::class, PaymentChequeRepository::class);
 
         //Service
         $this->app->bind(AuthServiceInterface::class, AuthService::class);
@@ -108,6 +118,8 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(BillPaymentServiceInterface::class, BillPaymentService::class);
         $this->app->bind(BillPaymentDetailServiceInterface::class, BillPaymentDetailService::class);
         $this->app->bind(BillPaymentChequeServiceInterface::class, BillPaymentChequeService::class);
+        $this->app->bind(PaymentInvoiceServiceInterface::class, PaymentInvoiceService::class);
+        $this->app->bind(PaymentChequeServiceInterface::class, PaymentChequeService::class);
     }
 
     /**

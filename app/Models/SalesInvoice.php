@@ -25,6 +25,7 @@ class SalesInvoice extends Model
         'date',
         'due_date',
         'terms',
+        'amount',
         'is_cancelled',
         'is_approved',
         'remarks',
@@ -35,6 +36,9 @@ class SalesInvoice extends Model
         parent::boot();
 
         static::creating(function ($sales_invoice) {
+            if (empty($sales_invoice->invoice_no)) {
+                $sales_invoice->invoice_no = self::generateInvoiceNo();
+            }
             $sales_invoice->document_no = self::generateInvoiceRefDocNo();
         });
     }
@@ -46,6 +50,16 @@ class SalesInvoice extends Model
         $timestamp = now()->format('His');
 
         return 'SI-'.$date.'-'.$timestamp.'-'.rand(1000, 9999);
+    }
+
+    private static function generateInvoiceNo()
+    {
+        // Generate a unique invoice number in the format POS-INVOICENUMBER
+        $lastInvoice = self::latest('id')->first();
+        $lastInvoiceNumber = $lastInvoice ? (int) str_replace('POS-', '', $lastInvoice->invoice_no) : 0;
+        $newInvoiceNumber = str_pad($lastInvoiceNumber + 1, 8, '0', STR_PAD_LEFT);
+
+        return 'POS-'.$newInvoiceNumber;
     }
 
     public function branch(): BelongsTo
@@ -81,5 +95,10 @@ class SalesInvoice extends Model
     public function sales_invoice_detail(): HasMany
     {
         return $this->hasMany(SalesInvoiceDetail::class);
+    }
+
+    public function payment_detail(): HasMany
+    {
+        return $this->hasMany(PaymentDetail::class);
     }
 }

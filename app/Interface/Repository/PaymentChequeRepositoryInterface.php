@@ -2,7 +2,7 @@
 
 namespace App\Interface\Repository;
 
-interface PaymentMethodRepositoryInterface
+interface PaymentChequeRepositoryInterface
 {
     public function findMany();
 

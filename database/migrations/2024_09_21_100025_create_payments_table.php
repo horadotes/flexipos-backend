@@ -14,11 +14,11 @@ return new class extends Migration
             $table->unsignedBigInteger('prepared_by_id');
             $table->unsignedBigInteger('customer_id');
             $table->unsignedBigInteger('approvedby')->nullable();
-            $table->string('or_number')->nullable();
-            $table->boolean('is_approved');
-            $table->boolean('is_cancelled');
-            $table->string('payment_date');
             $table->string('cancelled_by_id')->nullable();
+            $table->string('or_number')->nullable();
+            $table->boolean('is_approved')->nullable();
+            $table->boolean('is_cancelled')->nullable();
+            $table->string('payment_date');
             $table->string('remarks')->nullable();
             $table->timestamps();
         });

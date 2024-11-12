@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Log;
 
 class PaymentDetail extends Model
 {
@@ -12,44 +13,50 @@ class PaymentDetail extends Model
 
     protected $fillable = [
         'payment_id',
-        'product_id',
-        'quantity',
-        'payment_method_id',
-        'bank_id',
-        'cheque_number',
-        'cheque_date',
-        'amount',
+        'sales_invoice_id',
         'sales_invoice_no',
+        'amount',
     ];
-
-    protected static function booted()
-    {
-        static::created(function ($paymentDetail) {
-            $product = $paymentDetail->product;
-            if ($product) {
-                $product->quantity_onhand -= $paymentDetail->quantity;
-                $product->save();
-            }
-        });
-    }
 
     public function payment(): BelongsTo
     {
         return $this->belongsTo(Payment::class);
     }
 
-    public function product(): BelongsTo
+    public function salesInvoice(): BelongsTo
     {
-        return $this->belongsTo(Product::class);
+        return $this->belongsTo(SalesInvoice::class);
     }
 
-    public function payment_method(): BelongsTo
+    protected static function booted()
     {
-        return $this->belongsTo(PaymentMethod::class);
+        static::created(function ($paymentDetail) {
+            $salesInvoice = SalesInvoice::where('invoice_no', $paymentDetail->sales_invoice_no)->first();
+            if ($salesInvoice) {
+                $salesInvoice->amount -= $paymentDetail->amount;
+                $salesInvoice->save();
+                Log::info("Amount decreased by {$paymentDetail->amount} for invoice No: {$salesInvoice->invoice_no}");
+            } else {
+                Log::error("Sales invoice not found for payment detail ID: {$paymentDetail->id}");
+            }
+        });
+
+        static::updating(function ($paymentDetail) {
+            $salesInvoice = SalesInvoice::where('invoice_no', $paymentDetail->sales_invoice_no)->first();
+            if ($salesInvoice) {
+                $originalAmount = $paymentDetail->getOriginal('amount');
+                $amountDifference = $paymentDetail->amount - $originalAmount;
+                $salesInvoice->amount += $amountDifference;
+                $salesInvoice->save();
+                Log::info("Amount adjusted by {$amountDifference} for invoice No: {$salesInvoice->invoice_no}");
+            } else {
+                Log::error("Sales invoice not found for payment detail ID: {$paymentDetail->id}");
+            }
+        });
     }
 
     // public function bank(): BelongsTo
     // {
     //     return $this->belongsTo(Bank::class);
-    // }`
+    // }
 }

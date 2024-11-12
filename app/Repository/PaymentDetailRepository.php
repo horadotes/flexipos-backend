@@ -20,40 +20,26 @@ class PaymentDetailRepository implements PaymentDetailRepositoryInterface
 
     public function create(object $payload)
     {
-        return DB::transaction(function () use ($payload) {
-            $paymentDetail = new PaymentDetail();
-            $paymentDetail->payment_id = $payload->payment_id;
-            $paymentDetail->product_id = $payload->product_id;
-            $paymentDetail->quantity = $payload->quantity;
-            $paymentDetail->payment_method_id = $payload->payment_method_id;
-            $paymentDetail->bank_id = $payload->bank_id; // Uncomment if using bank relation
-            $paymentDetail->cheque_number = $payload->cheque_number;
-            $paymentDetail->cheque_date = $payload->cheque_date;
-            $paymentDetail->amount = $payload->amount;
-            $paymentDetail->sales_invoice_no = $payload->sales_invoice_no;
-            $paymentDetail->save();
+        $paymentDetail = new PaymentDetail();
+        $paymentDetail->payment_id = $payload->payment_id;
+        $paymentDetail->sales_invoice_id = $payload->sales_invoice_id;
+        $paymentDetail->sales_invoice_no = $payload->sales_invoice_no;
+        $paymentDetail->amount = $payload->amount;
+        $paymentDetail->save();
 
-            return $paymentDetail->fresh();
-        });
+        return $paymentDetail->fresh();
     }
 
     public function update(object $payload, int $id)
     {
-        return DB::transaction(function () use ($payload, $id) {
-            $paymentDetail = PaymentDetail::findOrFail($id);
-            $paymentDetail->payment_id = $payload->payment_id;
-            $paymentDetail->product_id = $payload->product_id;
-            $paymentDetail->quantity = $payload->quantity;
-            $paymentDetail->payment_method_id = $payload->payment_method_id;
-            $paymentDetail->bank_id = $payload->bank_id; // Uncomment if using bank relation
-            $paymentDetail->cheque_number = $payload->cheque_number;
-            $paymentDetail->cheque_date = $payload->cheque_date;
-            $paymentDetail->amount = $payload->amount;
-            $paymentDetail->sales_invoice_no = $payload->sales_invoice_no;
-            $paymentDetail->save();
+        $paymentDetail = PaymentDetail::findOrFail($id);
+        $paymentDetail->payment_id = $payload->payment_id;
+        $paymentDetail->sales_invoice_id = $payload->sales_invoice_id;
+        $paymentDetail->sales_invoice_no = $payload->sales_invoice_no;
+        $paymentDetail->amount = $payload->amount;
+        $paymentDetail->save();
 
-            return $paymentDetail->fresh();
-        });
+        return $paymentDetail->fresh();
     }
 
     public function delete(int $id)

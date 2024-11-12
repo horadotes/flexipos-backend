@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SalesInvoiceUpdateRequest extends FormRequest
+class PaymentChequeUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,22 +22,12 @@ class SalesInvoiceUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'branch_id',
-            'sales_order_id',
-            'customer_id' => 'required',
-            'prepared_by_id' => 'required',
-            'sales_representative' => 'required',
-            'cancelled_by_id',
-            'approved_by_id',
-            'invoice_no',
-            'document_no',
-            'date',
-            'due_date',
-            'terms',
+            'payment_id' => 'required',
+            'bank',
+            'cheque_number',
+            'cheque_date',
+            'cheque_voucher_number',
             'amount',
-            'is_cancelled',
-            'is_approved',
-            'remarks',
         ];
     }
 }
