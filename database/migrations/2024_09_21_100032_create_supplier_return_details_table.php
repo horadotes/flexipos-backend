@@ -10,17 +10,19 @@ return new class extends Migration
     {
         Schema::create('supplier_return_details', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('supplier_return_id');
             $table->unsignedBigInteger('product_id');
+            $table->unsignedBigInteger('supplier_return_id');
+            $table->string('supplier_return_number');
+            $table->string('unit');
+            $table->string('expiry_date');
             $table->string('quantity');
-            $table->string('description');
-            $table->string('financial_impact');
+            $table->string('price');
             $table->timestamps();
         });
 
         Schema::table('supplier_return_details', function (Blueprint $table) {
-            $table->foreign('supplier_return_id')->references('id')->on('supplier_returns')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('product_id')->references('id')->on('products')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('supplier_return_id')->references('id')->on('supplier_returns')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

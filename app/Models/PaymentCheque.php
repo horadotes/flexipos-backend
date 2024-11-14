@@ -23,11 +23,13 @@ class PaymentCheque extends Model
     protected static function booted()
     {
         static::created(function ($paymentCheque) {
-            $salesinvoice = $paymentCheque->salesinvoice;
-            if ($salesinvoice) {
-                $salesinvoice->amount -= $paymentCheque->amount;
-                $salesinvoice->save();
-                Log::info("Amount decreased by +{$paymentCheque->amount} for bill ID: {$salesinvoice->id}");
+            $salesInvoice = SalesInvoice::where('invoice_no', $paymentCheque->sales_invoice_no)->first();
+            if ($salesInvoice) {
+                $salesInvoice->amount -= $paymentCheque->amount;
+                $salesInvoice->save();
+                Log::info("Amount decreased by {$paymentCheque->amount} for invoice No: {$salesInvoice->invoice_no}");
+            } else {
+                Log::error("Sales invoice not found for payment detail ID: {$paymentCheque->id}");
             }
         });
 

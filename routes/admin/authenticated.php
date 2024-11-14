@@ -17,6 +17,8 @@ use App\Http\Controllers\Api\Admin\ProductController;
 use App\Http\Controllers\Api\Admin\SalesInvoiceController;
 use App\Http\Controllers\Api\Admin\SalesInvoiceDetailController;
 use App\Http\Controllers\Api\Admin\SupplierController;
+use App\Http\Controllers\Api\Admin\SupplierReturnController;
+use App\Http\Controllers\Api\Admin\SupplierReturnDetailController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -38,6 +40,8 @@ Route::middleware('auth:sanctum')->group(function () {
         'bills_payment' => BillPaymentController::class,
         'bills_payment_details' => BillPaymentDetailController::class,
         'bills_payment_cheques' => BillPaymentChequeController::class,
+        'supplier_returns' => SupplierReturnController::class,
+        'supplier_return_detail' => SupplierReturnDetailController::class,
     ]);
 
     Route::apiResource('admin', AdminController::class)->except(['store']);

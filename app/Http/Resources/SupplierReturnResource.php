@@ -16,10 +16,14 @@ class SupplierReturnResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'supplier_id' => $this->supplier_id,
-            'processed_by_id' => $this->processed_by_id,
+            'bill_id' => $this->bill_id,
+            'prepared_by_id' => $this->prepared_by_id,
+            'approved_by_id' => $this->approved_by_id,
+            'cancelled_by_id' => $this->cancelled_by_id,
+            'branch_no' => $this->branch_no,
             'return_date' => $this->return_date,
-            'status' => $this->status,
+            'remarks' => $this->remarks,
+            'is_cancelled' => $this->is_cancelled,
             'created_at' => $this->created_at,
         ];
     }

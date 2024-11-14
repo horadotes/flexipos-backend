@@ -11,11 +11,13 @@ class SupplierReturnDetail extends Model
     use HasFactory;
 
     protected $fillable = [
-        'supplier_return_id',
         'product_id',
+        'supplier_return_number',
+        'supplier_return_id',
+        'unit',
+        'expiry_date',
         'quantity',
-        'description',
-        'financial_impact',
+        'price',
     ];
 
     public function supplier_return(): BelongsTo
@@ -26,5 +28,21 @@ class SupplierReturnDetail extends Model
     public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class);
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($supplier_return_detail) {
+            $supplier_return_detail->supplier_return_number = self::generateSupplierReturnNumber();
+        });
+    }
+
+    private static function generateSupplierReturnNumber()
+    {
+        // Generate a unique OR number, e.g., using current date in mm/dd/yyyy format and current timestamp
+
+        return 'SRN-'.rand(1000, 9999);
     }
 }

@@ -16,11 +16,13 @@ class SupplierReturnDetailResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'supplier_return_id' => $this->supplier_return_id,
-            'product_id' => $this->product_id,
+            'product_id' => $this->product->name,
+            'supplier_return_id' => $this->product->supplier_return_id,
+            'supplier_return_number' => $this->supplier_return_number,
+            'unit' => $this->unit,
+            'expiry_date' => $this->expiry_date,
             'quantity' => $this->quantity,
-            'description' => $this->description,
-            'financial_impact' => $this->financial_impact,
+            'price' => $this->price,
             'created_at' => $this->created_at,
         ];
     }

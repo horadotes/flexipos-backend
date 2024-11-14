@@ -22,11 +22,13 @@ class SupplierReturnDetailUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'supplier_return_id' => 'required',
             'product_id' => 'required',
+            'supplier_return_id' => 'required',
+            'supplier_return_number' => 'required',
+            'unit' => 'required',
+            'expiry_date' => 'required',
             'quantity' => 'required',
-            'description' => 'required',
-            'financial_impact' => 'required',
+            'price' => 'required',
         ];
     }
 }

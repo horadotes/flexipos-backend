@@ -13,16 +13,22 @@ return new class extends Migration
     {
         Schema::create('supplier_returns', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('supplier_id');
-            $table->unsignedBigInteger('processed_by_id');
+            $table->unsignedBigInteger('bill_id');
+            $table->unsignedBigInteger('prepared_by_id');
+            $table->unsignedBigInteger('approved_by_id')->nullable();
+            $table->unsignedBigInteger('cancelled_by_id')->nullable();
+            $table->string('branch_no')->nullable();
             $table->string('return_date');
-            $table->boolean('status');
+            $table->string('remarks');
+            $table->boolean('is_cancelled')->default(false);
             $table->timestamps();
         });
 
         Schema::table('supplier_returns', function (Blueprint $table) {
-            $table->foreign('supplier_id')->references('id')->on('suppliers')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('processed_by_id')->references('id')->on('employees')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('bill_id')->references('id')->on('bills')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('prepared_by_id')->references('id')->on('employees')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('approved_by_id')->references('id')->on('employees')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('cancelled_by_id')->references('id')->on('employees')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

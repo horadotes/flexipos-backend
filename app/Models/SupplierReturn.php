@@ -12,20 +12,34 @@ class SupplierReturn extends Model
     use HasFactory;
 
     protected $fillable = [
-        'supplier_id',
-        'processed_by_id',
+        'bill_id',
+        'prepared_by_id',
+        'approved_by_id',
+        'cancelled_by_id',
+        'branch_no',
         'return_date',
-        'status',
+        'remarks',
+        'is_cancelled',
     ];
 
-    public function supplier(): BelongsTo
+    public function bill(): BelongsTo
     {
-        return $this->belongsTo(Supplier::class);
+        return $this->belongsTo(Bill::class);
     }
 
-    public function processed_by(): BelongsTo
+    public function preparedBy(): BelongsTo
     {
-        return $this->belongsTo(Employee::class, 'id');
+        return $this->belongsTo(Employee::class);
+    }
+
+    public function approvedBy(): BelongsTo
+    {
+        return $this->belongsTo(Employee::class);
+    }
+
+    public function cancelledBy(): BelongsTo
+    {
+        return $this->belongsTo(Employee::class);
     }
 
     public function supplier_return_details(): HasMany
