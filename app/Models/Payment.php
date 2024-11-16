@@ -23,6 +23,21 @@ class Payment extends Model
         'remarks',
     ];
 
+    public function customer(): BelongsTo
+    {
+        return $this->belongsTo(Customer::class);
+    }
+
+    public function prepared_by(): BelongsTo
+    {
+        return $this->belongsTo(Employee::class);
+    }
+
+    public function payment_detail(): HasMany
+    {
+        return $this->hasMany(PaymentDetail::class);
+    }
+
     protected static function boot()
     {
         parent::boot();
@@ -36,20 +51,5 @@ class Payment extends Model
     {
         // Generate a unique OR number, e.g., using current timestamp or any other logic
         return 'OR-'.now()->format('YmdHis').'-'.rand(1000, 999999);
-    }
-
-    public function customer(): BelongsTo
-    {
-        return $this->belongsTo(Customer::class);
-    }
-
-    public function prepared_by(): BelongsTo
-    {
-        return $this->belongsTo(Employee::class);
-    }
-
-    public function payment_details(): HasMany
-    {
-        return $this->hasMany(PaymentDetail::class);
     }
 }

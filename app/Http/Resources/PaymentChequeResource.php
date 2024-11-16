@@ -17,6 +17,7 @@ class PaymentChequeResource extends JsonResource
         return [
             'id' => $this->id,
             'payment_id' => $this->payment_id,
+            'sales_invoice_id' => $this->sales_invoice_id,
             'bank' => $this->bank,
             'cheque_number' => $this->cheque_number,
             'cheque_date' => $this->cheque_date,

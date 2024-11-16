@@ -20,33 +20,40 @@ class PaymentCheque extends Model
         'amount',
     ];
 
+    public function payment(): BelongsTo
+    {
+        return $this->belongsTo(Payment::class);
+    }
+
+    public function salesInvoice(): BelongsTo
+    {
+        return $this->belongsTo(SalesInvoice::class, 'sales_invoice_id');
+    }
+
     protected static function booted()
     {
         static::created(function ($paymentCheque) {
-            $salesInvoice = SalesInvoice::where('invoice_no', $paymentCheque->sales_invoice_no)->first();
+            $salesInvoice = $paymentCheque->salesInvoice;
             if ($salesInvoice) {
                 $salesInvoice->amount -= $paymentCheque->amount;
                 $salesInvoice->save();
-                Log::info("Amount decreased by {$paymentCheque->amount} for invoice No: {$salesInvoice->invoice_no}");
+                Log::info("Amount decreased by {$paymentCheque->amount} for invoice ID: {$salesInvoice->id}");
             } else {
-                Log::error("Sales invoice not found for payment detail ID: {$paymentCheque->id}");
+                Log::error("Sales invoice not found for payment cheque ID: {$paymentCheque->id}");
             }
         });
 
         static::updating(function ($paymentCheque) {
-            $salesinvoice = $paymentCheque->salesinvoice;
-            if ($salesinvoice) {
-                $originalQuantity = $paymentCheque->getOriginal('amount');
-                $quantityDifference = $paymentCheque->amount - $originalQuantity;
-                $salesinvoice->amount += $quantityDifference;
-                $salesinvoice->save();
-                Log::info("Amount adjusted by +{$quantityDifference} for Product ID: {$salesinvoice->id}");
+            $salesInvoice = $paymentCheque->salesInvoice;
+            if ($salesInvoice) {
+                $originalAmount = $paymentCheque->getOriginal('amount');
+                $amountDifference = $paymentCheque->amount - $originalAmount;
+                $salesInvoice->amount += $amountDifference;
+                $salesInvoice->save();
+                Log::info("Amount adjusted by {$amountDifference} for invoice ID: {$salesInvoice->id}");
+            } else {
+                Log::error("Sales invoice not found for payment cheque ID: {$paymentCheque->id}");
             }
         });
-    }
-
-    public function payment(): BelongsTo
-    {
-        return $this->belongsTo(Payment::class);
     }
 }
