@@ -23,7 +23,7 @@ class PaymentResource extends JsonResource
             'payment_date' => $this->payment_date,
             'prepared_by_id' => $this->prepared_by_id,
             'cancelled_by_id' => $this->cancelled_by_id,
-            'approvedby' => $this->approvedby,
+            'approved_by_id' => $this->approved_by_id,
             'remarks' => $this->remarks,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,

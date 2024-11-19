@@ -27,7 +27,7 @@ class PaymentRepository implements PaymentRepositoryInterface
         $payment->is_cancelled = $payload->is_cancelled;
         $payment->payment_date = $payload->payment_date;
         $payment->cancelled_by_id = $payload->cancelled_by_id;
-        $payment->approvedby = $payload->approvedby;
+        $payment->approved_by_id = $payload->approved_by_id;
         $payment->remarks = $payload->remarks;
         $payment->save();
 
@@ -44,7 +44,7 @@ class PaymentRepository implements PaymentRepositoryInterface
         $payment->is_cancelled = $payload->is_cancelled;
         $payment->payment_date = $payload->payment_date;
         $payment->cancelled_by_id = $payload->cancelled_by_id;
-        $payment->approvedby = $payload->approvedby;
+        $payment->approved_by_id = $payload->approved_by_id;
         $payment->remarks = $payload->remarks;
         $payment->save();
 

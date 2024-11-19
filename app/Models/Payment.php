@@ -12,14 +12,14 @@ class Payment extends Model
     use HasFactory;
 
     protected $fillable = [
+        'prepared_by_id',
+        'cancelled_by_id',
+        'approved_by_id',
         'or_number',
         'customer_id',
         'is_approved',
         'is_cancelled',
         'payment_date',
-        'prepared_by_id',
-        'cancelled_by_id',
-        'approvedby',
         'remarks',
     ];
 
@@ -29,6 +29,16 @@ class Payment extends Model
     }
 
     public function prepared_by(): BelongsTo
+    {
+        return $this->belongsTo(Employee::class);
+    }
+
+    public function approved_by(): BelongsTo
+    {
+        return $this->belongsTo(Employee::class);
+    }
+
+    public function cancelled_by(): BelongsTo
     {
         return $this->belongsTo(Employee::class);
     }
