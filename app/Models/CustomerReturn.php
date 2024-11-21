@@ -47,4 +47,20 @@ class CustomerReturn extends Model
     {
         return $this->hasMany(CustomerReturnDetail::class);
     }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($customer_return) {
+            $customer_return->customer_return_number = self::generateSupplierReturnNumber();
+        });
+    }
+
+    private static function generateSupplierReturnNumber()
+    {
+        // Generate a unique OR number, e.g., using current date in mm/dd/yyyy format and current timestamp
+
+        return 'CRN-'.rand(1000, 9999);
+    }
 }

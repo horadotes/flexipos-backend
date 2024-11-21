@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('prepared_by_id');
             $table->unsignedBigInteger('approved_by_id');
             $table->unsignedBigInteger('cancelled_by_id');
+            $table->string('customer_return_number');
             $table->string('branch_number');
             $table->string('return_date');
             $table->string('remarks');

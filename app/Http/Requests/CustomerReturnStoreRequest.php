@@ -27,7 +27,7 @@ class CustomerReturnStoreRequest extends FormRequest
             'approved_by_id',
             'cancelled_by_id',
             'branch_number',
-            'customer_return_number' => 'required',
+            'customer_return_number',
             'return_date' => 'required',
             'remarks' => 'required',
             'is_cancelled',
