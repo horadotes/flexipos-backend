@@ -16,6 +16,7 @@ class SupplierReturnResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'supplier_return_number' => $this->supplier_return_number,
             'bill_id' => $this->bill_id,
             'prepared_by_id' => $this->prepared_by_id,
             'approved_by_id' => $this->approved_by_id,

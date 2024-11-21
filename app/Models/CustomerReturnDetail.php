@@ -12,11 +12,12 @@ class CustomerReturnDetail extends Model
 
     protected $fillable = [
         'customer_return_id',
+        'customer_return_number',
         'product_id',
+        'unit',
+        'expiry_date',
         'quantity',
-        'unit_price',
-        'amount',
-        'reason',
+        'price',
     ];
 
     public function customer_return(): BelongsTo

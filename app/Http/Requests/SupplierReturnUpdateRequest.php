@@ -22,6 +22,7 @@ class SupplierReturnUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'supplier_return_number',
             'bill_id' => 'required',
             'prepared_by_id' => 'required',
             'approved_by_id',

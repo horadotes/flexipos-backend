@@ -20,6 +20,7 @@ class SupplierReturnRepository implements SupplierReturnRepositoryInterface
     public function create(object $payload)
     {
         $supplierReturn = new SupplierReturn();
+        $supplierReturn->supplier_return_number = $payload->supplier_return_number;
         $supplierReturn->bill_id = $payload->bill_id;
         $supplierReturn->prepared_by_id = $payload->prepared_by_id;
         $supplierReturn->approved_by_id = $payload->approved_by_id;
@@ -36,6 +37,7 @@ class SupplierReturnRepository implements SupplierReturnRepositoryInterface
     public function update(object $payload, int $id)
     {
         $supplierReturn = SupplierReturn::findOrFail($id);
+        $supplierReturn->supplier_return_number = $payload->supplier_return_number;
         $supplierReturn->bill_id = $payload->bill_id;
         $supplierReturn->prepared_by_id = $payload->prepared_by_id;
         $supplierReturn->approved_by_id = $payload->approved_by_id;

@@ -11,22 +11,21 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('supplier_returns', function (Blueprint $table) {
+        Schema::create('customer_returns', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('bill_id');
+            $table->unsignedBigInteger('sales_invoice_id');
             $table->unsignedBigInteger('prepared_by_id');
-            $table->unsignedBigInteger('approved_by_id')->nullable();
-            $table->unsignedBigInteger('cancelled_by_id')->nullable();
-            $table->string('supplier_return_number')->nullable();
-            $table->string('branch_no')->nullable();
+            $table->unsignedBigInteger('approved_by_id');
+            $table->unsignedBigInteger('cancelled_by_id');
+            $table->string('branch_number');
             $table->string('return_date');
             $table->string('remarks');
-            $table->boolean('is_cancelled')->default(false);
+            $table->boolean('is_cancelled');
             $table->timestamps();
         });
 
-        Schema::table('supplier_returns', function (Blueprint $table) {
-            $table->foreign('bill_id')->references('id')->on('bills')->onUpdate('cascade')->onDelete('cascade');
+        Schema::table('customer_returns', function (Blueprint $table) {
+            $table->foreign('sales_invoice_id')->references('id')->on('sales_invoices')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('prepared_by_id')->references('id')->on('employees')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('approved_by_id')->references('id')->on('employees')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('cancelled_by_id')->references('id')->on('employees')->onUpdate('cascade')->onDelete('cascade');
@@ -38,6 +37,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('supplier_returns');
+        Schema::dropIfExists('customer_returns');
     }
 };

@@ -17,11 +17,12 @@ class CustomerReturnDetailResource extends JsonResource
         return [
             'id' => $this->id,
             'customer_return_id' => $this->customer_return_id,
+            'customer_return_number' => $this->customer_return_number,
             'product_id' => $this->product_id,
+            'unit' => $this->unit,
+            'expiry_date' => $this->expiry_date,
             'quantity' => $this->quantity,
-            'unit_price' => $this->unit_price,
-            'amount' => $this->amount,
-            'reason' => $this->reason,
+            'price' => $this->price,
             'created_at' => $this->created_at,
         ];
     }

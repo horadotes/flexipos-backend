@@ -12,10 +12,11 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('customer_return_id');
             $table->unsignedBigInteger('product_id');
+            $table->string('customer_return_number');
+            $table->string('unit');
+            $table->string('expiry_date');
             $table->string('quantity');
-            $table->string('unit_price');
-            $table->string('amount');
-            $table->string('reason');
+            $table->string('price');
             $table->timestamps();
         });
 

@@ -12,20 +12,35 @@ class CustomerReturn extends Model
     use HasFactory;
 
     protected $fillable = [
-        'processed_by_id',
-        'customer_id',
+        'sales_invoice_id',
+        'prepared_by_id',
+        'approved_by_id',
+        'cancelled_by_id',
+        'branch_number',
+        'customer_return_number',
         'return_date',
-        'return_status',
+        'remarks',
+        'is_cancelled',
     ];
 
-    public function processed_by(): BelongsTo
+    public function sales_invoice_id(): BelongsTo
     {
-        return $this->belongsTo(Employee::class, 'id');
+        return $this->belongsTo(SalesInvoice::class);
     }
 
-    public function customer(): BelongsTo
+    public function prepared_by_id(): BelongsTo
     {
-        return $this->belongsTo(Customer::class);
+        return $this->belongsTo(Employee::class);
+    }
+
+    public function approved_by_id(): BelongsTo
+    {
+        return $this->belongsTo(Employee::class);
+    }
+
+    public function cancelled_by_id(): BelongsTo
+    {
+        return $this->belongsTo(Employee::class);
     }
 
     public function customer_return_details(): HasMany

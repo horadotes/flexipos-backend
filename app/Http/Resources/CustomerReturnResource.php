@@ -16,10 +16,15 @@ class CustomerReturnResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'processed_by_id' => $this->processed_by_id,
-            'customer_id' => $this->customer_id,
+            'sales_invoice_id' => $this->sales_invoice_id,
+            'prepared_by_id' => $this->prepared_by_id,
+            'approved_by_id' => $this->approved_by_id,
+            'cancelled_by_id' => $this->cancelled_by_id,
+            'branch_number' => $this->branch_number,
+            'customer_return_number' => $this->customer_return_number,
             'return_date' => $this->return_date,
-            'return_status' => $this->return_status,
+            'remarks' => $this->remarks,
+            'is_cancelled' => $this->is_cancelled,
             'created_at' => $this->created_at,
         ];
     }

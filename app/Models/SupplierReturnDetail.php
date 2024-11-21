@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Log;
 
 class SupplierReturnDetail extends Model
 {
@@ -30,19 +31,26 @@ class SupplierReturnDetail extends Model
         return $this->belongsTo(Product::class);
     }
 
-    protected static function boot()
+    protected static function booted()
     {
-        parent::boot();
-
-        static::creating(function ($supplier_return_detail) {
-            $supplier_return_detail->supplier_return_number = self::generateSupplierReturnNumber();
+        static::created(function ($supplierReturnDetail) {
+            $product = $supplierReturnDetail->product;
+            if ($product) {
+                $product->quantity_onhand -= $supplierReturnDetail->quantity;
+                $product->save();
+                Log::info("Quantity on hand increased by +{$supplierReturnDetail->quantity} for Product ID: {$product->id}");
+            }
         });
-    }
 
-    private static function generateSupplierReturnNumber()
-    {
-        // Generate a unique OR number, e.g., using current date in mm/dd/yyyy format and current timestamp
-
-        return 'SRN-'.rand(1000, 9999);
+        static::updating(function ($supplierReturnDetail) {
+            $product = $supplierReturnDetail->product;
+            if ($product) {
+                $originalQuantity = $supplierReturnDetail->getOriginal('quantity');
+                $quantityDifference = $supplierReturnDetail->quantity - $originalQuantity;
+                $product->quantity_onhand -= $quantityDifference;
+                $product->save();
+                Log::info("Quantity on hand adjusted by +{$quantityDifference} for Product ID: {$product->id}");
+            }
+        });
     }
 }

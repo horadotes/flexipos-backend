@@ -24,7 +24,7 @@ class SupplierReturnDetailStoreRequest extends FormRequest
         return [
             'product_id' => 'required',
             'supplier_return_id' => 'required',
-            'supplier_return_number' => 'required',
+            'supplier_return_number',
             'unit' => 'required',
             'expiry_date' => 'required',
             'quantity' => 'required',

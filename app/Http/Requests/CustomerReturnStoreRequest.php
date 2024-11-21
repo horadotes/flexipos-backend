@@ -22,10 +22,15 @@ class CustomerReturnStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'processed_by_id' => 'required',
-            'customer_id' => 'required',
+            'sales_invoice_id' => 'required',
+            'prepared_by_id' => 'required',
+            'approved_by_id',
+            'cancelled_by_id',
+            'branch_number',
+            'customer_return_number' => 'required',
             'return_date' => 'required',
-            'return_status' => 'required',
+            'remarks' => 'required',
+            'is_cancelled',
         ];
     }
 }

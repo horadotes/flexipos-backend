@@ -23,11 +23,12 @@ class CustomerReturnDetailUpdateRequest extends FormRequest
     {
         return [
             'customer_return_id' => 'required',
+            'customer_return_number' => 'required',
             'product_id' => 'required',
+            'unit' => 'required',
+            'expiry_date' => 'required',
             'quantity' => 'required',
-            'unit_price' => 'required',
-            'amount' => 'required',
-            'reason' => 'required',
+            'price' => 'required',
         ];
     }
 }
