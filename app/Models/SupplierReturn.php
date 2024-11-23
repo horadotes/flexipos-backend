@@ -23,6 +23,13 @@ class SupplierReturn extends Model
         'is_cancelled',
     ];
 
+    public function casts(): array
+    {
+        return [
+            'is_cancelled' => 'boolean',
+        ];
+    }
+
     public function bill(): BelongsTo
     {
         return $this->belongsTo(Bill::class);

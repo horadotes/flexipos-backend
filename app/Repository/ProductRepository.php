@@ -9,7 +9,7 @@ class ProductRepository implements ProductRepositoryInterface
 {
     public function findMany()
     {
-        return Product::paginate(10);
+        return Product::all();
     }
 
     public function findOneById(int $id)

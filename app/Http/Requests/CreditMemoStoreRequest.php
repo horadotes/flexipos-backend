@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class InventoryAdjustmentDetailUpdateRequest extends FormRequest
+class CreditMemoStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,12 +22,17 @@ class InventoryAdjustmentDetailUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'inventory_adjustment_id' => 'required',
-            'product_id' => 'required',
-            'unit' => 'required',
-            'expiry_date' => 'required',
-            'quantity' => 'required',
+            'prepared_by_id' => 'required',
+            'cancelled_by_id',
+            'customer_id' => 'required',
+            'sales_representative_id' => 'required',
+            'credit_type' => 'required',
+            'invoice_no' => 'required',
+            'sales_invoice_document_no',
+            'date' => 'required',
+            'amount' => 'required',
             'remarks',
+            'is_cancelled' => 'required',
         ];
     }
 }

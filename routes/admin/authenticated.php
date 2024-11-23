@@ -7,10 +7,13 @@ use App\Http\Controllers\Api\Admin\BillDetailController;
 use App\Http\Controllers\Api\Admin\BillPaymentChequeController;
 use App\Http\Controllers\Api\Admin\BillPaymentController;
 use App\Http\Controllers\Api\Admin\BillPaymentDetailController;
+use App\Http\Controllers\Api\Admin\CreditMemoController;
 use App\Http\Controllers\Api\Admin\CustomerController;
 use App\Http\Controllers\Api\Admin\CustomerReturnController;
 use App\Http\Controllers\Api\Admin\CustomerReturnDetailController;
 use App\Http\Controllers\Api\Admin\EmployeeController;
+use App\Http\Controllers\Api\Admin\InventoryAdjustmentController;
+use App\Http\Controllers\Api\Admin\InventoryAdjustmentDetailController;
 use App\Http\Controllers\Api\Admin\PaymentChequeController;
 use App\Http\Controllers\Api\Admin\PaymentController;
 use App\Http\Controllers\Api\Admin\PaymentDetailController;
@@ -46,6 +49,9 @@ Route::middleware('auth:sanctum')->group(function () {
         'supplier_return_detail' => SupplierReturnDetailController::class,
         'customer_returns' => CustomerReturnController::class,
         'customer_return_detail' => CustomerReturnDetailController::class,
+        'inventory_adjustments' => InventoryAdjustmentController::class,
+        'inventory_adjustment_details' => InventoryAdjustmentDetailController::class,
+        'credit_memo' => CreditMemoController::class,
     ]);
 
     Route::apiResource('admin', AdminController::class)->except(['store']);

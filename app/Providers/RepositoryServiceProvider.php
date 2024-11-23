@@ -7,10 +7,13 @@ use App\Interface\Repository\BillPaymentChequeRepositoryInterface;
 use App\Interface\Repository\BillPaymentDetailRepositoryInterface;
 use App\Interface\Repository\BillPaymentRepositoryInterface;
 use App\Interface\Repository\BillRepositoryInterface;
+use App\Interface\Repository\CreditMemoRepositoryInterface;
 use App\Interface\Repository\CustomerRepositoryInterface;
 use App\Interface\Repository\CustomerReturnDetailRepositoryInterface;
 use App\Interface\Repository\CustomerReturnRepositoryInterface;
 use App\Interface\Repository\EmployeeRepositoryInterface;
+use App\Interface\Repository\InventoryAdjustmentDetailRepositoryInterface;
+use App\Interface\Repository\InventoryAdjustmentRepositoryInterface;
 use App\Interface\Repository\PaymentChequeRepositoryInterface;
 use App\Interface\Repository\PaymentDetailRepositoryInterface;
 use App\Interface\Repository\PaymentInvoiceRepositoryInterface;
@@ -29,10 +32,13 @@ use App\Interface\Service\BillPaymentChequeServiceInterface;
 use App\Interface\Service\BillPaymentDetailServiceInterface;
 use App\Interface\Service\BillPaymentServiceInterface;
 use App\Interface\Service\BillServiceInterface;
+use App\Interface\Service\CreditMemoServiceInterface;
 use App\Interface\Service\CustomerReturnDetailServiceInterface;
 use App\Interface\Service\CustomerReturnServiceInterface;
 use App\Interface\Service\CustomerServiceInterface;
 use App\Interface\Service\EmployeeServiceInterface;
+use App\Interface\Service\InventoryAdjustmentDetailServiceInterface;
+use App\Interface\Service\InventoryAdjustmentServiceInterface;
 use App\Interface\Service\PaymentChequeServiceInterface;
 use App\Interface\Service\PaymentDetailServiceInterface;
 use App\Interface\Service\PaymentInvoiceServiceInterface;
@@ -50,10 +56,13 @@ use App\Repository\BillPaymentChequeRepository;
 use App\Repository\BillPaymentDetailRepository;
 use App\Repository\BillPaymentRepository;
 use App\Repository\BillRepository;
+use App\Repository\CreditMemoRepository;
 use App\Repository\CustomerRepository;
 use App\Repository\CustomerReturnDetailRepository;
 use App\Repository\CustomerReturnRepository;
 use App\Repository\EmployeeRepository;
+use App\Repository\InventoryAdjustmentDetailRepository;
+use App\Repository\InventoryAdjustmentRepository;
 use App\Repository\PaymentChequeRepository;
 use App\Repository\PaymentDetailRepository;
 use App\Repository\PaymentInvoiceRepository;
@@ -72,10 +81,13 @@ use App\Service\BillPaymentChequeService;
 use App\Service\BillPaymentDetailService;
 use App\Service\BillPaymentService;
 use App\Service\BillService;
+use App\Service\CreditMemoService;
 use App\Service\CustomerReturnDetailService;
 use App\Service\CustomerReturnService;
 use App\Service\CustomerService;
 use App\Service\EmployeeService;
+use App\Service\InventoryAdjustmentDetailService;
+use App\Service\InventoryAdjustmentService;
 use App\Service\PaymentChequeService;
 use App\Service\PaymentDetailService;
 use App\Service\PaymentInvoiceService;
@@ -120,6 +132,9 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(SupplierReturnDetailRepositoryInterface::class, SupplierReturnDetailRepository::class);
         $this->app->bind(CustomerReturnRepositoryInterface::class, CustomerReturnRepository::class);
         $this->app->bind(CustomerReturnDetailRepositoryInterface::class, CustomerReturnDetailRepository::class);
+        $this->app->bind(InventoryAdjustmentRepositoryInterface::class, InventoryAdjustmentRepository::class);
+        $this->app->bind(InventoryAdjustmentDetailRepositoryInterface::class, InventoryAdjustmentDetailRepository::class);
+        $this->app->bind(CreditMemoRepositoryInterface::class, CreditMemoRepository::class);
 
         //Service
         $this->app->bind(AuthServiceInterface::class, AuthService::class);
@@ -144,6 +159,9 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(SupplierReturnDetailServiceInterface::class, SupplierReturnDetailService::class);
         $this->app->bind(CustomerReturnServiceInterface::class, CustomerReturnService::class);
         $this->app->bind(CustomerReturnDetailServiceInterface::class, CustomerReturnDetailService::class);
+        $this->app->bind(InventoryAdjustmentServiceInterface::class, InventoryAdjustmentService::class);
+        $this->app->bind(InventoryAdjustmentDetailServiceInterface::class, InventoryAdjustmentDetailService::class);
+        $this->app->bind(CreditMemoServiceInterface::class, CreditMemoService::class);
     }
 
     /**

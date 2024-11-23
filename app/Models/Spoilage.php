@@ -19,6 +19,13 @@ class Spoilage extends Model
         'status',
     ];
 
+    public function casts(): array
+    {
+        return [
+            'status' => 'boolean',
+        ];
+    }
+
     public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class);

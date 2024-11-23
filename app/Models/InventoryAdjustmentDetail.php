@@ -11,15 +11,17 @@ class InventoryAdjustmentDetail extends Model
     use HasFactory;
 
     protected $fillable = [
-        'adjustment_id',
+        'inventory_adjustment_id',
         'product_id',
-        'total',
-        'cost',
+        'unit',
+        'expiry_date',
+        'quantity',
+        'remarks',
     ];
 
-    public function adjustment(): BelongsTo
+    public function inventory_adjustment(): BelongsTo
     {
-        return $this->belongsTo(InventoryAdjustment::class, 'id');
+        return $this->belongsTo(InventoryAdjustment::class);
     }
 
     public function product(): BelongsTo

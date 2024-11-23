@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class InventoryAdjustmentResource extends JsonResource
+class CreditMemoResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,10 +17,14 @@ class InventoryAdjustmentResource extends JsonResource
         return [
             'id' => $this->id,
             'prepared_by_id' => $this->prepared_by_id,
-            'approved_by_id' => $this->approved_by_id,
             'cancelled_by_id' => $this->cancelled_by_id,
-            'branch_number' => $this->branch_number,
-            'adjustment_date' => $this->adjustment_date,
+            'customer_id' => $this->customer_id,
+            'sales_representative_id' => $this->sales_representative_id,
+            'credit_type' => $this->credit_type,
+            'invoice_no' => $this->invoice_no,
+            'sales_invoice_document_no' => $this->sales_invoice_document_no,
+            'date' => $this->date,
+            'amount' => $this->amount,
             'remarks' => $this->remarks,
             'is_cancelled' => $this->is_cancelled,
             'created_at' => $this->created_at,

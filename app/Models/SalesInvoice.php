@@ -31,6 +31,14 @@ class SalesInvoice extends Model
         'remarks',
     ];
 
+    public function casts(): array
+    {
+        return [
+            'is_cancelled' => 'boolean',
+            'is_approved' => 'boolean',
+        ];
+    }
+
     protected static function boot()
     {
         parent::boot();

@@ -16,10 +16,12 @@ class InventoryAdjustmentDetailResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'adjustment_id' => $this->adjustment_id,
+            'inventory_adjustment_id' => $this->inventory_adjustment_id,
             'product_id' => $this->product_id,
-            'total' => $this->total,
-            'cost' => $this->cost,
+            'unit' => $this->unit,
+            'expiry_date' => $this->expiry_date,
+            'quantity' => $this->quantity,
+            'remarks' => $this->remarks,
             'created_at' => $this->created_at,
         ];
     }

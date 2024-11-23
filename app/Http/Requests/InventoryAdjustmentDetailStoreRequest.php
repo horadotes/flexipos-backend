@@ -22,10 +22,12 @@ class InventoryAdjustmentDetailStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'adjustment_id' => 'required',
+            'inventory_adjustment_id' => 'required',
             'product_id' => 'required',
-            'total' => 'required',
-            'cost' => 'required',
+            'unit' => 'required',
+            'expiry_date' => 'required',
+            'quantity' => 'required',
+            'remarks',
         ];
     }
 }

@@ -23,6 +23,13 @@ class CustomerReturn extends Model
         'is_cancelled',
     ];
 
+    public function casts(): array
+    {
+        return [
+            'is_cancelled' => 'boolean',
+        ];
+    }
+
     public function sales_invoice_id(): BelongsTo
     {
         return $this->belongsTo(SalesInvoice::class);

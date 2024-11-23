@@ -22,10 +22,13 @@ class InventoryAdjustmentStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'date' => 'required',
-            'type' => 'required',
-            'reason' => 'required',
-            'status' => 'required',
+            'prepared_by_id' => 'required',
+            'approved_by_id',
+            'cancelled_by_id',
+            'branch_number',
+            'adjustment_date' => 'required',
+            'remarks',
+            'is_cancelled' => 'required',
         ];
     }
 }
